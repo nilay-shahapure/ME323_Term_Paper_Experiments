@@ -124,37 +124,6 @@ def e1_preheat_simulation():
 # ===============================================
 # E2 — Force reduction via temperature softening
 # ===============================================
-def e2_force_reduction_plot():
-    """
-    Illustrates how a temperature-softening law (Johnson–Cook-like) would reduce
-    the shear-flow contribution to cutting force, assuming constant geometry.
-
-    σ(T) = (A + B ε^n) (1 + C ln ε̇) [1 - (T*)^m],
-    T* = (T - T_room) / (T_melt - T_room)
-
-    We plot (σ / σ_25C) * 100 [%] vs T.
-    """
-    # Illustrative constants (not fitted to a specific grade)
-    A, B, n = 650e6, 400e6, 0.25
-    C, m = 0.015, 1.0
-    eps, epsdot = 0.8, 1e4
-    Troom, Tmelt = 298.15, 1673.15  # K
-
-    def flow_stress(T):
-        Tstar = np.clip((T - Troom) / (Tmelt - Troom), 0.0, 0.99)
-        return (A + B * (eps**n)) * (1.0 + C * log(max(epsdot, 1.0))) * (1.0 - Tstar**m)
-
-    Tlist = np.linspace(298.15, 1123.15, 12)  # 25 to 850 °C
-    sigma = np.array([flow_stress(T) for T in Tlist])
-    Fc_rel = sigma / sigma[0] * 100.0
-
-    plt.figure()
-    plt.plot(Tlist - 273.15, Fc_rel, marker='o')
-    plt.xlabel('Shear-zone temperature (°C)')
-    plt.ylabel('Relative cutting force (%)')
-    plt.tight_layout()
-    plt.savefig('B1_LAL_force_vs_T.png', dpi=200)
-
 
 # ====================================================
 # E3 — Is my MQL flow enough? Film thickness estimate
@@ -260,7 +229,7 @@ def e4_droplet_delivery_plot_and_table():
 # ============
 if __name__ == "__main__":
     e1_preheat_simulation()
-    e2_force_reduction_plot()
+    
     e3_film_thickness_plot_and_table()
     e4_droplet_delivery_plot_and_table()
     print("Done. Figures and CSV tables saved.")
