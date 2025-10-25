@@ -39,26 +39,7 @@ with laser power (P), absorptivity (\eta), and Gaussian radius (r).
 
 ---
 
-### E2 — Temperature softening → force reduction (illustrative)
 
-**Goal:** Visualize how raising shear-zone temperature can **reduce cutting force**.
-
-**Model (Johnson–Cook-style softening):**
-[
-\sigma(T)=(A+B\epsilon^n),\bigl(1+C\ln\dot{\epsilon}\bigr),\bigl[1-(T^*)^m\bigr],\qquad
-T^*=\frac{T-T_r}{T_m-T_r}.
-]
-Holding geometry constant, assume (F_c \propto \sigma(T)) and plot the **relative** force vs (T).
-
-**What to look for:**
-
-* `B1_LAL_force_vs_T.png` — A 200–300 °C rise typically shows a **~10–25 %** drop in the **relative** force in this toy model; 400–600 °C gives **~27–45 %**. This matches the **direction/order** seen in LAL experiments.
-
-
-
-**Limitations:** Generic parameters, constant chip geometry → **illustrative**, not predictive.
-
----
 
 ### E3 — Is my MQL flow enough? (film adequacy back-of-the-envelope)
 
